@@ -5,17 +5,24 @@ var message = "Blank";
  
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 	
-	if (msg.text === "url"){
-		
+	if (msg.text === "update"){
+		//console.log(msg.url);
 		if (urlRegex.test(msg.url)) {
 			for (var arrScripts = document.getElementsByTagName('script'), i = 0; i < arrScripts.length; i++) {
+				//console.log(arrScripts);
 				if (arrScripts[i].textContent.indexOf('externalId') != -1) {
-					var myRegexp = /("externalId"[\s\:]*")([\w-]*)("\,)/g;
-					var channelId = myRegexp.exec(arrScripts[i].textContent)[2];
+
+					var myRegexpUrl = /("vanityChannelUrl"[\s\:]*")(((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?}\s]+))/g;
+					var vanityChannelUrl = myRegexpUrl.exec(arrScripts[i].textContent)[2];
+					console.log(vanityChannelUrl);
+
+					var myRegexpChan = /("externalId"[\s\:]*")([\w-]*)("\,)/g;
+					var channelId = myRegexpChan.exec(arrScripts[i].textContent)[2];
 					var channelRss = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + channelId;
 				
 					if(channelRss) {
 						message = channelRss;
+						//console.log(message);
 					}
 					
 				} else if (arrScripts[i].textContent.indexOf('playlistId') != -1) {
@@ -25,13 +32,16 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 					
 					if(playlistRss){
 						message = playlistRss;
+						//console.log(message);
 					}
 				}
 			}
 		}
+	}
+
+	if (msg.text === "clicked"){
 
 		console.log(message);
-		message = '';
 	}
 
 });

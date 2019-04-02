@@ -1,26 +1,35 @@
 // Regex-pattern to check URLs against. 
 // It matches URLs like: http[s]://[...]youtube.com[...]
 var urlRegex = /^https?:\/\/(?:[^./?#]+\.)?youtube\.com/;
-var updatedUrl = "Nothing";
+var message = {
+		text: "blank"
+	};
 
 // On update, get new info.
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
 	if (urlRegex.test(tab.url)) {
-		updatedUrl = tab.url;
+		message.text = "update";
+		message.url = tab.url;
+
+		chrome.tabs.sendMessage(tab.id, message);
 	}
+
+	
+
 });
 
 
 // When the browser-action button is clicked...
 chrome.browserAction.onClicked.addListener(function (tab) {
     // ...check the URL of the active tab against our pattern and...
-	var message = {
-		text: "url",
-		tab: tab,
-		url: updatedUrl
-	};
+	if (urlRegex.test(tab.url)) {
+		message.text = "clicked";
+		message.url = tab.url;
+
+		chrome.tabs.sendMessage(tab.id, message);
+	}
 		
-	chrome.tabs.sendMessage(tab.id, message);
+	
     
 });

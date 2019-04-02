@@ -1,6 +1,6 @@
 {
     "name": "Defy YT RSS URL maker",
-    "version": ".1",
+    "version": "0.1",
     "description": "get a feed from a channel",
     "manifest_version": 2,
 	"content_scripts": [
