@@ -1,15 +1,33 @@
 <!DOCTYPE html>
-  <html>
-    <head>
-      <style>
-        button {
-          height: 30px;
-          width: 30px;
-          outline: none;
-        }
-      </style>
-    </head>
-    <body>
-      <button></button>
-    </body>
-  </html>
+<html>
+  <head>
+    <script src="popup.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Raleway");
+      html {
+        background-color: #000000;
+        font-family: "Raleway" !important;
+        color: azure;
+        background-image: url("https://www.transparenttextures.com/patterns/dark-mosaic.png");
+      }
+      input {
+        border-radius: 2px;
+        margin: 5px;
+        font-family: "Raleway";
+        padding: 2px;
+      }
+      span {
+        font-family: "Raleway";
+      }
+      button {
+        height: 30px;
+        width: 30px;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <span>Channel</span>
+    <input type="text" id="url" disabled value="Hello there" />
+  </body>
+</html>

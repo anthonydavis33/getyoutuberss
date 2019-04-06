@@ -1,22 +1,24 @@
 {
-    "name": "Defy YT RSS URL maker",
-    "version": "0.1",
-    "description": "get a feed from a channel",
-    "manifest_version": 2,
-	"content_scripts": [
-		{
-		"matches": ["*://*.youtube.com/*"],
-		"js": ["content.js"]
-		}
-	],
-	"background": {
-		"scripts": ["background.js"]
-	},
-	"browser_action": {
-		"default_title": "Test Extension"
-	},
-	"permissions": [
-		"tabs",
-		"activeTab"
-	]
+  "name": "Defy YT RSS URL maker",
+  "version": "0.1",
+  "description": "get a feed from a channel",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_title": "Test Extension",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "https://www.googleapis.com/youtube/v3/search",
+    "tabs",
+    "activeTab"
+  ]
 }
